@@ -4,8 +4,10 @@
   "description": "blog list api Helsinki Course",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "cross-env NODE_ENV=production node index.js",
+    "dev": "cross-env NODE_ENV=development node index.js",
+    "test_blogs": "cross-env NODE_ENV=test node --test tests/blogs.test.js",
+    "test_users": "cross-env NODE_ENV=test node --test tests/users.test.js"
   },
   "repository": {
     "type": "git",
@@ -16,11 +18,19 @@
   "bugs": {
     "url": "https://github.com/jdmc525/BlogListApi_jdmc/issues"
   },
-  "homepage": "https://github.com/jdmc525/BlogListApi_jdmc#readme",
+  "homepage": "https://github.com/jdmc525/BlogListApi_jdmc",
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "lodash": "^4.17.21",
     "mongoose": "^8.14.3"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "jest": "^29.7.0",
+    "supertest": "^7.1.1"
   }
 }

@@ -1,5 +1,7 @@
 
 //Imprime en consola los parametros 
+
+
 const info = (...params) => {
   console.log(...params)
 }
