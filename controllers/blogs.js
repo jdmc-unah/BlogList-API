@@ -35,8 +35,12 @@ blogRouter.post('/', async (request, response) => {
     return response.status(401).json({ error: 'token invalid' })
   }
   
+
   //busca el usuario por el id del token decodificado
   const user = request.user
+
+  console.log(user);
+  
 
   //valida que el usuario exista
   if (!user) {
@@ -63,9 +67,18 @@ blogRouter.post('/', async (request, response) => {
 
 blogRouter.delete('/:id', async (request, response)=>{
  
-  const blogID = request.params.id
+  const blogID = request.params.id  
+
+  
+
+  //validacion de token  
+  if (!request.token) {  
+    return response.status(401).json({ error: 'token invalid' })
+  }
+
   const sessionUser = request.user
   const blogtoDelete = await Blog.findById(blogID)
+
 
      //valida que el usuario y el blog a borrar exista
   if (!sessionUser) {
@@ -75,6 +88,8 @@ blogRouter.delete('/:id', async (request, response)=>{
   }else if(!blogtoDelete){
     return response.status(400).json({error: "blog does not exist"})
   }
+
+ 
 
   if (blogtoDelete.user.toString() === sessionUser._id.toString()  ) {
     const deletedBlog = await Blog.findByIdAndDelete(blogID)
