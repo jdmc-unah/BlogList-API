@@ -20,6 +20,14 @@ const blogSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
+  },
+  picUrl:{
+    type: String,
+    required: true
+  },
+  description:{
+    type: String,
+    required: true
   }
 
 })

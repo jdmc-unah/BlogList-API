@@ -9,7 +9,6 @@ const jwt = require('jsonwebtoken')
 
 blogRouter.get('/', async (request, response) => {
   
-  
   const blogs = await Blog.find({}).populate('user', {username: 1, name: 1})
   
   response.json(blogs)
@@ -52,7 +51,9 @@ blogRouter.post('/', async (request, response) => {
     author: request.body.author,
     url: request.body.url,
     likes: Number(request.body.likes) || 0  ,
-    user: user.id
+    user: user.id,
+    picUrl: request.body.picUrl,
+    description: request.body.description
   })
 
   const addedBlog =  await blog.save()
@@ -68,8 +69,6 @@ blogRouter.post('/', async (request, response) => {
 blogRouter.delete('/:id', async (request, response)=>{
  
   const blogID = request.params.id  
-
-  
 
   //validacion de token  
   if (!request.token) {  
@@ -107,16 +106,16 @@ blogRouter.delete('/:id', async (request, response)=>{
 
 
 blogRouter.put('/:id', async (request, response)=> {
-  const {title, author, url, likes} = request.body
+  const {title, author, url, likes, picUrl, description} = request.body
   const user = request.body.user.id
    
   const updatedBlog = await Blog.findByIdAndUpdate(
-        request.params.id,  {title, author, url, likes, user}, 
+        request.params.id,  {title, author, url, likes, user, picUrl, description}, 
         { new: true, runValidators: true, context: 'query' }
       )
 
   updatedBlog === null ?  
-  response.status(400).json({error: "contact doesn't exist"}) : 
+  response.status(400).json({error: "blog doesn't exist"}) : 
   response.json(updatedBlog)
 
 })
