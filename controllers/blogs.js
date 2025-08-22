@@ -53,7 +53,8 @@ blogRouter.post('/', async (request, response) => {
     likes: Number(request.body.likes) || 0  ,
     user: user.id,
     picUrl: request.body.picUrl,
-    description: request.body.description
+    description: request.body.description,
+    category: request.body.category
   })
 
   const addedBlog =  await blog.save()
@@ -106,11 +107,11 @@ blogRouter.delete('/:id', async (request, response)=>{
 
 
 blogRouter.put('/:id', async (request, response)=> {
-  const {title, author, url, likes, picUrl, description} = request.body
+  const {title, author, url, likes, picUrl, description, category} = request.body
   const user = request.body.user.id
    
   const updatedBlog = await Blog.findByIdAndUpdate(
-        request.params.id,  {title, author, url, likes, user, picUrl, description}, 
+        request.params.id,  {title, author, url, likes, user, picUrl, description, category}, 
         { new: true, runValidators: true, context: 'query' }
       )
 
