@@ -1,6 +1,7 @@
 const logger = require('./logger')
 const User = require('../models/user')
 const jwt = require('jsonwebtoken')
+const app = express()
 
 
 
@@ -19,9 +20,9 @@ const requestLogger = (request, response, next) => {
 
 const unknownEndpoint = (request, response) => {
   // response.status(404).send({ error: 'unknown endpoint' })
-  app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-});
+    app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  });
 }
 
 const errorHandler = (error, request, response, next) => {
