@@ -107,10 +107,7 @@ blogRouter.post('/', async (request, response) => {
   
 
   //busca el usuario por el id del token decodificado
-  const user = request.user
-
-  console.log(user);
-  
+  const user = request.user  
 
   //valida que el usuario exista
   if (!user) {
@@ -126,7 +123,8 @@ blogRouter.post('/', async (request, response) => {
     user: user,
     picUrl: request.body.picUrl,
     description: request.body.description,
-    category: request.body.category
+    category: request.body.category,
+    userLikes: []
   })
 
   const addedBlog =  await blog.save()
@@ -180,11 +178,11 @@ blogRouter.delete('/:id', async (request, response)=>{
 
 
 blogRouter.put('/:id', async (request, response)=> {
-  const {title, author, url, likes, picUrl, description, category} = request.body
+  const {title, author, url, likes, picUrl, description, category, userLikes} = request.body
   const user = request.body.user.id
    
   const updatedBlog = await Blog.findByIdAndUpdate(
-        request.params.id,  {title, author, url, likes, user, picUrl, description, category}, 
+        request.params.id,  {title, author, url, likes, user, picUrl, description, category, userLikes}, 
         { new: true, runValidators: true, context: 'query' }
       )
 

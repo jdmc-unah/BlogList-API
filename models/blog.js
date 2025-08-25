@@ -33,6 +33,10 @@ const blogSchema = new mongoose.Schema({
     type: String,
     required: true
   }
+  ,userLikes:{
+    type: Array ,
+    required: true
+  }
 
 })
 
