@@ -13,6 +13,7 @@ Una API RESTful construida con **Node.js** y **Express** que permite gestionar p
   - Obtener todas las publicaciones
   - Obtener una publicación por ID
   - Eliminar una publicación
+  - Filtrar publicaciones por medio de parametros
 
 ## 🛠️ Tecnologías utilizadas
 
