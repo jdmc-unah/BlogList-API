@@ -36,7 +36,7 @@ app.use(express.json())
 app.use(middleware.requestLogger)
 
 
-
+app.use(express.static('dist'))
 
 app.use('/api/users', userRouter)
 app.use('/api/login', loginRouter)
