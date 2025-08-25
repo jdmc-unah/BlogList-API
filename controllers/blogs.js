@@ -26,7 +26,7 @@ blogRouter.post('/filter', async (request, response) => {
 
 
   //* Filtra por categoria
-  if (cat != '') {
+  if (cat != 'all') {
     blogs = blogs.filter((blog) => blog.category.toString().trim().toLowerCase() === cat.toString().trim().toLowerCase())        
   }
 
@@ -117,19 +117,21 @@ blogRouter.post('/', async (request, response) => {
     return response.status(400).json({error: "user not found"})
   }
 
+  
   const blog = new Blog({
     title: request.body.title,
     author: request.body.author,
     url: request.body.url,
     likes: Number(request.body.likes) || 0  ,
-    user: user.id,
+    user: user,
     picUrl: request.body.picUrl,
     description: request.body.description,
     category: request.body.category
   })
 
   const addedBlog =  await blog.save()
-
+  console.log(addedBlog);
+  
   user.blogs = user.blogs.concat(addedBlog._id)
   await user.save()
 
