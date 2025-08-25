@@ -32,10 +32,10 @@ mongoose.connect(config.MONGODB_URI )
 //Uso de Middlewares
 app.use(cors())
 app.use(express.json())
-app.use(express.static('dist'))
 
 app.use(middleware.requestLogger)
 
+app.use(express.static('dist'))
 
 app.use('/api/users', userRouter)
 app.use('/api/login', loginRouter)
@@ -46,10 +46,7 @@ app.use( middleware.userExtractor)
 app.use('/api/blogs', blogRouter)
 
 
-// app.use(middleware.unknownEndpoint)
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-});
+app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)
 
 

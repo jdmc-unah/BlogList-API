@@ -18,7 +18,10 @@ const requestLogger = (request, response, next) => {
 }
 
 const unknownEndpoint = (request, response) => {
-  response.status(404).send({ error: 'unknown endpoint' })
+  // response.status(404).send({ error: 'unknown endpoint' })
+  app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+});
 }
 
 const errorHandler = (error, request, response, next) => {
