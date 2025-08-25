@@ -60,10 +60,10 @@ const userExtractor = async (request, response, next)=>{
   //validacion de token
 
   if (request.token) {
-    console.log(request.token); //todo >> quitar esto para produccion 
+    
     
     const decodedToken = jwt.verify(request.token, process.env.SECRET)  
-    console.log('decodedtoken',decodedToken);
+    // console.log('decodedtoken',decodedToken);
     
     if (decodedToken.id) {
       const user = await User.findById(decodedToken.id)    
