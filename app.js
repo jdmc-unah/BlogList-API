@@ -1,6 +1,7 @@
 
 //Importar Modulos
 const express = require('express')
+const path = require('path')
 const app = express()
 
 const cors = require('cors')
@@ -46,7 +47,12 @@ app.use( middleware.userExtractor)
 app.use('/api/blogs', blogRouter)
 
 
-app.use(middleware.unknownEndpoint)
+app.use(express.static(path.join(__dirname, 'dist')));
+
+app.get('/*splat', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
+// app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)
 
 
