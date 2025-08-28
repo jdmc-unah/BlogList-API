@@ -51,6 +51,7 @@ app.get('/*splat', (req, res) => {
   
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
+
 // app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)
 
