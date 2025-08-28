@@ -16,9 +16,6 @@ const blogRouter = require('./controllers/blogs')
 const userRouter = require('./controllers/users')
 const loginRouter = require('./controllers/login')
 		
-
-
-
 //Conexion a MongoDB
 logger.info('connecting to', config.MONGODB_URI )
 
@@ -50,6 +47,8 @@ app.use('/api/blogs', blogRouter)
 // app.use(express.static(path.join(__dirname, 'dist')));
 
 app.get('/*splat', (req, res) => {
+  console.log(path.join(__dirname, 'dist', 'index.html'));
+  
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 // app.use(middleware.unknownEndpoint)
